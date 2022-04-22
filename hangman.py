@@ -1,95 +1,87 @@
 import random
-
-print("WELCOME TO HANGMAN GAME")
-print("----------------------------------")
-word=["secret","ritika","apple","ubuntu"]
-randomword=random.choice(word)
-print(randomword)
-for x in randomword:
-    print("_",end=" ")
-def print_hangman(wrong):
-    if wrong==0:
-        print("\n+---+")
-        print("     |")
-        print("     |")
-        print("     |")
-        print("    ===")
-    elif wrong==1:
-        print("\n+---+")
-        print("O    |")
-        print("     |")
-        print("     |")
-        print("    ===")
-    elif wrong==2:
-        print("\n+---+")
-        print(" O    |")
-        print(" |    |")
-        print("      |")
-        print("    ===")
-    elif wrong==3:
-        print("\n+---+")
-        print(" O    |")
-        print("/|    |")
-        print("      |")
-        print("    ===")
-    elif wrong==4:
-        print("\n+---+")
-        print(" O    |")
-        print("/|\   |")
-        print("      |")
-        print("    ===")
-    elif wrong==5:
-        print("\n+---+")
-        print(" O    |")
-        print("/|\   |")
-        print("/     |")
-        print("    ===")
-    elif wrong==6:
-        print("\n+---+")
-        print(" O    |")
-        print("/|\   |")
-        print("/ \   |")
-        print("    ===")
-
-def printword(guessedletters):
-    counter=0
-    rightletters=0
-    for char in randomword:
-        if char in guessedletters:
-            print(randomword[counter],end=" ")
-            rightletters+=1
-        else:
-            print(" ",end=" ")
-        counter=counter+1
-    return rightletters
-
-
-def printlines():
-    print("\r")
-    for char in randomword:
-        print("\u203E",end=" ")
-
-length_of_word=len(randomword)
-amount_wrong=0
-current_guess_index=0
-current_letters=[]
-current_lettersright=0
-
-while amount_wrong!=6 and current_lettersright!=length_of_word:
-    print("\nletters guessed so far:")
-    for letter in current_letters:
-        print(letter,end="  ")
-    letterguessd=input("guess a letter")
-    if randomword[current_guess_index]==letterguessd:
-        print_hangman(amount_wrong)
-        current_guess_index+=1
-        current_letters.append(letterguessd)
-        current_lettersright=printword(current_letters)
-        printlines()
-    else:
-        amount_wrong+=1
-        current_letters.append(letterguessd)
-        print_hangman(amount_wrong)
-        current_lettersright=printword(current_letters)
-        printlines()
-print("Game is over! thank you for playing")
+name=input("enter name")
+print("__",name,"__")
+print("******")
+print("__welcome to the game hangman___")
+print("-------------------------------------------------------------")
+print("try to guess the word in less then 10 attemp")
+def hangman():
+	list=['shikha','lovely','himani','india','important','ritika']
+	word=random.choice(list)
+	turns=10
+	guessmade=''
+	letter=set('abcdefghijklmnopqrstuvwxyz')
+	while len(word)>0:
+		mainword=""
+		missed=0
+		for i in word:
+			if i in guessmade:
+				mainword=mainword+i
+			else:
+				mainword=mainword+"_ "
+		if mainword==word:
+			print(mainword)
+			print("you won------")
+			break
+		print("guess a word",mainword)
+		guess=input()
+		if guess in letter:
+			guessmade=guessmade+guess
+		else:
+			print("enter the valid charecters")
+			guess=(input())
+		if guess not in word:
+			turns=turns-1
+			if turns==9:
+				print("9 turns are left")
+				print("___")
+			if turns==8:
+				print("8 turns are left")
+				print("___")
+				print("         0          ")
+			if turns==7:
+				print("7 turns are left")
+				print("___")
+				print("          0         ")
+				print("          |         ")
+			
+			if turns==6:
+				print("6 turns are left")
+				print("___")
+				print("          0         ")
+				print("          |         ")
+				print("          /         ")
+			if turns==5:
+				print("5 turns are left")
+				print("___")
+				print("          0         ")
+				print("          |         ")
+				print("         / \       ")
+			if turns==4:
+				print("4 turns are left")
+				print("___")
+				print("         \0         ")
+				print("          |         ")
+				print("         / \       ")
+			if turns==3:
+				print("3 turns are left")
+				print("___")
+				print("          \0/         ")
+				print("           |         ")
+				print("          / \         ")
+			if turns==2:
+				print("2 turns are left")
+				print("___")
+				print("          \0/  |       ")
+				print("           |         ")
+				print("          / \         ")
+			if turns==1:
+				print("last turns are left")
+				print("___")
+				print("          \0/_|       ")
+				print("           |         ")
+				print("          / \         ")
+			if turns==0:
+				print("you loose")
+				print("yes let a good man die")
+hangman()
